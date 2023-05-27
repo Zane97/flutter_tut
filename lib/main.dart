@@ -18,27 +18,35 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
 
-      body: Center(
-        child: ElevatedButton.icon(
-          onPressed: (){
-            print("hello");
-          } ,
-          icon: Icon(
-            Icons.mail
+      body: Row(
+        
+        
+        children: [
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              color: Colors.cyan,
+              child: Text("1"),
+            ),
           ),
-          label: Text("mail me"),
-        )
-
-       // Image.asset('assets/space1.jpg')
-       // Text(
-       //     "Hello world",
-       //     style: TextStyle(
-       //       fontSize: 30.0,
-       //       fontWeight: FontWeight.bold,
-       //       letterSpacing: 2.0,
-       //       color: Colors.grey[600],
-       //       fontFamily: "ReenieBeanie",
-       //
+          Expanded(
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              color: Colors.orange,
+              child: Text("2"),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              color: Colors.pink,
+              child: Text("3"),
+            ),
+          ),
+        ],
       ),
 
       floatingActionButton: FloatingActionButton(

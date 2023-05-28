@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -24,38 +24,6 @@ class _QuoteListState extends State<QuoteList> {
     Quote(author: 'Mae West', text: "You only live once, but if you do it right, once is enough."),
   ];
 
-  Widget quoteTemplate(quote){
-    return Card(
-        margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-
-            children: [
-              Text(
-                quote.text,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.grey[600],
-                ),
-              ),
-
-              const SizedBox(height: 6.0),
-
-              Text(
-                quote.author,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey[800],
-                ),
-              ),
-            ],
-          ),
-        ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +37,10 @@ class _QuoteListState extends State<QuoteList> {
       ),
 
       body: Column(
-        children: quotes.map((quote) => quoteTemplate(quote) ).toList(),
+        children: quotes.map((quote) => QuoteCard(quote: quote) ).toList(),
 
       )
     );
   }
 }
+

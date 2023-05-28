@@ -1,139 +1,77 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+
+import 'quote.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: Card(),
+    home: QuoteList(),
   ));
 }
 
-class Card extends StatefulWidget {
-  const Card({Key? key}) : super(key: key);
+class QuoteList extends StatefulWidget {
+  const QuoteList({Key? key}) : super(key: key);
 
   @override
-  State<Card> createState() => _CardState();
+  State<QuoteList> createState() => _QuoteListState();
 }
 
-class _CardState extends State<Card> {
+class _QuoteListState extends State<QuoteList> {
 
-  int level = 0;
+  List<Quote> quotes =[
+    Quote(author: 'Dali Lama', text: "The purpose of our lives is to be happy."),
+    Quote(author: 'John Lennon', text: "Life is what happens when you're busy making other plans."),
+    Quote(author: 'Stephen King', text: "Get busy living or get busy dying."),
+    Quote(author: 'Mae West', text: "You only live once, but if you do it right, once is enough."),
+  ];
+
+  Widget quoteTemplate(quote){
+    return Card(
+        margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+
+            children: [
+              Text(
+                quote.text,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey[600],
+                ),
+              ),
+
+              const SizedBox(height: 6.0),
+
+              Text(
+                quote.author,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.grey[800],
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[200],
 
       appBar: AppBar(
-        title: const Text("ID card"),
+        title: const Text('Awesome Quote'),
         centerTitle: true,
-        backgroundColor: Colors.grey[850],
-        elevation: 0,
+        backgroundColor: Colors.redAccent,
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            level += 1;
-          });
-        },
-        backgroundColor: Colors.grey[800],
-        child: const Icon(Icons.plus_one),
-      ),
+      body: Column(
+        children: quotes.map((quote) => quoteTemplate(quote) ).toList(),
 
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-            const Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/space1.jpg'),
-                radius: 40
-              ),
-            ),
-
-            Divider(
-              height: 90.0,
-              color: Colors.grey[600],
-            ),
-
-            const Text(
-              "NAME",
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0,
-              )
-            ),
-
-            const SizedBox(
-              height: 10.0,
-            ),
-
-            const Text(
-                "Zane Jansen van Vuuren",
-                style: TextStyle(
-                  color: Colors.amberAccent,
-                  letterSpacing: 2.0,
-                  fontSize: 23.0,
-                  fontWeight: FontWeight.bold,
-                )
-            ),
-
-            const SizedBox(
-              height: 30.0,
-            ),
-
-            const Text(
-                "CURRENT LEVEL",
-                style: TextStyle(
-                  color: Colors.grey,
-                  letterSpacing: 2.0,
-                )
-            ),
-
-            const SizedBox(
-              height: 10.0,
-            ),
-
-            Text(
-                "$level",
-                style: const TextStyle(
-                  color: Colors.amberAccent,
-                  letterSpacing: 2.0,
-                  fontSize: 23.0,
-                  fontWeight: FontWeight.bold,
-                )
-            ),
-
-            const SizedBox(
-              height: 30.0,
-            ),
-
-            Row(
-              children: [
-                const Icon(
-                  Icons.email,
-                  color: Colors.grey,
-                ),
-
-                const SizedBox(
-                  width: 10.0,
-                ),
-
-                Text(
-                  "Test@123.co.za",
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                  ),
-                )
-              ],
-            )
-          ],
-        )
       )
     );
   }
 }
-

@@ -3,13 +3,21 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Card(),
   ));
 }
 
-class Card extends StatelessWidget {
+class Card extends StatefulWidget {
   const Card({Key? key}) : super(key: key);
+
+  @override
+  State<Card> createState() => _CardState();
+}
+
+class _CardState extends State<Card> {
+
+  int level = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +25,29 @@ class Card extends StatelessWidget {
       backgroundColor: Colors.grey[900],
 
       appBar: AppBar(
-        title: Text("ID card"),
+        title: const Text("ID card"),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0,
       ),
-      
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            level += 1;
+          });
+        },
+        backgroundColor: Colors.grey[800],
+        child: const Icon(Icons.plus_one),
+      ),
+
       body: Padding(
-        padding: EdgeInsets.all(30.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
-            Center(
+            const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/space1.jpg'),
                 radius: 40
@@ -41,7 +59,7 @@ class Card extends StatelessWidget {
               color: Colors.grey[600],
             ),
 
-            Text(
+            const Text(
               "NAME",
               style: TextStyle(
                 color: Colors.grey,
@@ -49,11 +67,11 @@ class Card extends StatelessWidget {
               )
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
 
-            Text(
+            const Text(
                 "Zane Jansen van Vuuren",
                 style: TextStyle(
                   color: Colors.amberAccent,
@@ -63,11 +81,11 @@ class Card extends StatelessWidget {
                 )
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
 
-            Text(
+            const Text(
                 "CURRENT LEVEL",
                 style: TextStyle(
                   color: Colors.grey,
@@ -75,13 +93,13 @@ class Card extends StatelessWidget {
                 )
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
 
             Text(
-                "8",
-                style: TextStyle(
+                "$level",
+                style: const TextStyle(
                   color: Colors.amberAccent,
                   letterSpacing: 2.0,
                   fontSize: 23.0,
@@ -89,18 +107,18 @@ class Card extends StatelessWidget {
                 )
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 30.0,
             ),
 
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.email,
                   color: Colors.grey,
                 ),
 
-                SizedBox(
+                const SizedBox(
                   width: 10.0,
                 ),
 
@@ -112,11 +130,10 @@ class Card extends StatelessWidget {
                 )
               ],
             )
-
           ],
         )
       )
-      
     );
   }
 }
+
